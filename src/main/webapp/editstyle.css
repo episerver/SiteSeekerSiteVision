@@ -1,0 +1,271 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 80%;
+  color: #444;
+}
+a:link,
+a:visited,
+a:hover,
+a:active { 
+  font-family: Arial, Helvetica, sans-serif;
+}
+a.help:link,
+a.help:visited,
+a.help:hover,
+a.help:active {
+  color: #0B6FB2;
+}
+input[type=submit] { 
+  font-size: 1.3em;
+}
+
+/* Sidhuvud och flikar */
+
+#header {
+  background: #008FD5;
+  overflow: auto;
+}
+h1 {
+  margin: 0;
+  color: #fff;
+  font-weight: normal;
+  text-transform: uppercase;
+  font-size: 1.5em;
+  padding: 0.5em;
+  color: #9DCFE8;
+  line-height: 1;
+  display: block;
+}
+h1 #logo {
+  text-transform: none;
+  font-size: 1.4em;
+  color: #fff;
+}
+#toptabs { 
+  margin: 0;
+  padding: 0 0.5em;
+  list-style: none;
+  font-size: 1.1em;
+  overflow: auto;
+}
+* html #toptabs {
+  height: 1%;
+}
+#toptabs li { 
+  margin: 0 1px;
+  padding: 0.4em 0.8em;
+  float: left;
+  background: #176FB1;
+  color: #fff;
+  -moz-border-radius-topleft: 0.4em;
+  -moz-border-radius-topright: 0.4em;
+  -webkit-border-top-left-radius: 0.4em;
+  -webkit-border-top-right-radius: 0.4em;
+}
+#toptabs li.current {
+  background: #fff;
+}
+#toptabs a:link,
+#toptabs a:visited,
+#toptabs a:active {
+  color: #fff;
+}
+#toptabs .current a:link,
+#toptabs .current a:visited,
+#toptabs .current a:active {
+  color: #444;
+}
+
+/* Innehåll */
+
+.pane {
+  clear: both;
+  display: none;
+  padding: 1em;
+}
+.pane.visible {
+  display: block;
+}
+
+.default-template { 
+  display: none;
+}
+
+fieldset {
+  border: none;
+  padding: 1em;
+}
+fieldset legend {
+  font-size: 1.2em;
+  color: #000;
+  font-weight: bold;
+}
+fieldset div.mandatory {
+    background: #f0f0f0;
+    padding: 0.3em 0;
+    overflow: auto;
+    margin: 0.3em 0;
+    -moz-border-radius: 0.4em;
+    -webkit-border-radius: 0.4em;
+}
+fieldset label {
+  width: 10em;
+  margin-right: 1em;
+  padding-top: 0.3em;
+  float: left;
+  text-align: right;
+}
+* html fieldset div.mandatory label {
+    padding-top: 0;
+}
+fieldset label.checkbox {
+  float: none;
+  width: 25em;
+}
+fieldset input[type=text],
+fieldset input[type=password] {
+  width: 30em;
+  float: left;
+  font-family: Monaco, "Lucida Console", "Courier New", Courier;
+  border: 1px solid #737373;
+  font-size: 0.9em;
+  padding: 1px;
+  margin: 1px;
+}
+* html #settings input { /* Fix för IE6 */
+  width: 30em;
+  float: left;
+  font-family: Monaco, "Lucida Console", "Courier New", Courier;
+  border: 1px solid #737373;
+  font-size: 0.9em;
+  padding: 1px;
+  margin: 1px;
+}
+fieldset br {
+  clear: left;
+}
+fieldset textarea {
+  width: 100%;
+  height: 3em;
+  border: 1px solid #737373;
+  font-size: 0.9em;
+  font-family: Monaco, "Lucida Console", "Courier New", Courier;
+  display: block;
+}
+fieldset.expanded textarea { 
+  height: 30em;
+}
+fieldset textarea.changed,
+fieldset input[type=text].changed,
+fieldset input[type=password].changed {
+  background: #F1FCBE;
+}
+fieldset p {
+  margin: 0.2em 0;
+}
+fieldset .template-code {
+  margin: 0.5em 0 0.2em 1.8em;
+}
+fieldset .template-code .revert { 
+  background: #ddd;
+  font-size: 0.9em;
+  border: 1px solid #ddd;
+  padding: 0.2em 0.5em;
+  float: left;
+  margin-left: 1em;
+  -moz-border-radius-bottomleft: 0.4em;
+  -moz-border-radius-bottomright: 0.4em;
+  -webkit-border-bottom-left-radius: 0.4em;
+  -webkit-border-bottom-right-radius: 0.4em;
+}
+fieldset .template-code .revert a:link,
+fieldset .template-code .revert a:visited,
+fieldset .template-code .revert a:active { 
+  color: #444;
+}
+fieldset .template-code .fold { 
+  background: #737373;
+  font-size: 0.9em;
+  border: 1px solid #737373;
+  color: #fff;
+  padding: 0.2em 0.5em;
+  float: right;
+  margin-right: 1em;
+  -moz-border-radius-bottomleft: 0.4em;
+  -moz-border-radius-bottomright: 0.4em;
+  -webkit-border-bottom-left-radius: 0.4em;
+  -webkit-border-bottom-right-radius: 0.4em;
+}
+fieldset .template-code .fold a:link,
+fieldset .template-code .fold a:visited,
+fieldset .template-code .fold a:active { 
+  color: #fff;
+}
+fieldset .template-code .fold-up { 
+  display: none;
+}
+fieldset.expanded .template-code .fold-up { 
+  display: block;
+}
+fieldset .template-code .fold-down { 
+  display: block;
+}
+fieldset.expanded .template-code .fold-down { 
+  display: none;
+}
+
+/* Specifika inställningar */
+
+#ws-help {
+  margin: 0.2em 0 0.2em 12.5em;
+  font-size: 0.9em;
+  display: block;
+}
+
+
+/* Sidfot */
+body {
+  margin: 0;
+  padding: 0 0 50px 0;
+}
+div#footer {
+  /* Positionering */
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  /* Utseende */
+  background: #FF9000;
+}
+* html div#footer {
+top:expression(eval(document.compatMode &&
+document.compatMode=='CSS1Compat') ?
+documentElement.scrollTop
++(documentElement.clientHeight-this.clientHeight) 
+: document.body.scrollTop
++(document.body.clientHeight-this.clientHeight));
+}
+
+div#footer div {
+  padding: 1em;
+}
+div#footer input {
+  float: right;
+}
+div#footer .cancel {
+  float: left;
+}
+
+@media screen {
+  body>form>div#footer {
+    position: fixed;
+  }
+}
+* html body {
+  overflow: hidden;
+} 
+* html div#content {
+  height: 100%;
+  overflow: auto;
+}

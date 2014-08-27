@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<portlet-app xmlns:sv="SiteVision" xmlns="http://java.sun.com/xml/ns/portlet" version="1.0"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:noNamespaceSchemaLocation="http://java.sun.com/xml/portlet.xsd">
+   <portlet>
+      <display-name xml:lang="EN">SiteSeeker Search</display-name>
+      <display-name xml:lang="SV">SiteSeeker Search</display-name>
+      <portlet-name>siteseeker-search</portlet-name>
+      <portlet-class>siteseeker.web.SearchPortlet</portlet-class>
+      <supported-locale>SV</supported-locale>
+      <supported-locale>EN</supported-locale>
+      <supports>
+	<mime-type>text/html</mime-type>
+	<portlet-mode>view</portlet-mode>
+	<portlet-mode>config</portlet-mode>
+      </supports>
+      <portlet-info>
+         <title>SiteSeeker</title>
+         <keywords>interactive</keywords>
+      </portlet-info>
+      <portlet-preferences>
+         <preference>
+            <name>webServiceTimeoutSeconds</name>
+            <value>20</value>
+         </preference>
+         <preference>
+            <name>siteSeekerWSUrl</name>
+            <value>http://default.siteseeker.se:8080/</value>
+         </preference>
+
+
+         <preference>
+            <name>search-page-tmpl</name>
+            <value></value>
+         </preference>
+         <preference>
+            <name>search-page-use-custom</name>
+            <value>off</value>
+         </preference>
+
+
+         <preference>
+            <name>form-tmpl</name>
+            <value></value>
+         </preference>
+         <preference>
+            <name>form-use-custom</name>
+            <value>off</value>
+         </preference>
+
+         <preference>
+            <name>page-numbers-tmpl</name>
+            <value></value>
+         </preference>
+         <preference>
+            <name>page-numbers-custom</name>
+            <value>off</value>
+         </preference>
+
+         <preference>
+            <name>hits-tmpl</name>
+            <value></value>
+         </preference>
+         <preference>
+            <name>hits-use-custom</name>
+            <value>off</value>
+         </preference>
+
+         <preference>
+            <name>siteSeekerWSUrl</name>
+            <value>http://default.siteseeker.se:8080/</value>
+         </preference>
+         <preference>
+            <name>siteSeekerWSUrl</name>
+            <value>http://default.siteseeker.se:8080/</value>
+         </preference>
+
+      </portlet-preferences>
+   </portlet>
+</portlet-app>

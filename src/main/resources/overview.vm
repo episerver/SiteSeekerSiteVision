@@ -1,0 +1,97 @@
+
+##
+## Macro for generating a sort order link
+##
+
+#macro( createSortOrderLink $i )
+  #if ( $i.isSelected )
+    <li class="ess-selected">
+      <span class="ess-selected portlet-menu-item-selected">$lang.get("search-sortorder$i.name")</span>
+  #else
+    <li>
+      <a href="$i.clickUrl" title="$lang.get("search-sortorder$i.name")" rel="nofollow">$lang.get("search-sortorder$i.name")</a>
+  #end
+  </li>
+#end
+
+##
+## Macro for generating an overview filter link
+##
+
+#macro( createFilterLink $i, $label, $group)
+  #if ($i.nHits > 0)  ## Show link only if there are hits for this filter
+    #set($linkTitle = $label)
+    #if ( $group != "" )
+      #set($linkTitle = $group + ": " + $label)
+    #end
+    #set($linkTitle = $util.escapeXml($linkTitle))
+    #set($linkText = $util.escapeXml($label))
+    #if ( $i.isSelected )
+      <li class="ess-selected">
+        <span class="ess-selected portlet-menu-item-selected">$linkText</span>
+    #else
+      <li>
+        <a href="$i.clickUrl" title="$linkTitle" rel="nofollow">$linkText</a>
+    #end
+      <span class="ess-hitcount"><span class="ess-hitcount-num">$i.nHits</span> 
+        <span class="ess-hitcount-label">$!i.documentLabel</span></span>
+    </li>
+  #end
+#end
+
+##
+## Begin template
+##
+
+#if ( $hits.size() > 0 )
+
+#if ( $sortOrders.size() > 0 )
+<h2 class="portlet-section-header">$lang.search-sortby</h2>
+<ul class="ess-sortorder portlet-section-body">
+  #createSortOrderLink( $sortOrders.relevance )
+  #createSortOrderLink( $sortOrders.date )
+  ##createSortOrderLink( $sortOrders.category )
+  ##createSortOrderLink( $sortOrders.title )
+</ul>
+#end
+
+#if ( $languages.size() > 0 )
+  <h2 class="portlet-section-header">$lang.search-language:</h2>
+  <ul class="ess-language portlet-section-body">
+  #foreach( $i in $languages )
+    #createFilterLink( $i, $lang.get("overview-languages-$i.name"), $lang.search-language )
+  #end
+  </ul>
+#end
+
+#if ( $fileFormats.size() > 0 )
+  <h2 class="portlet-section-header">$lang.search-doctype:</h2>
+  <ul class="ess-fileformat portlet-section-body">
+  #foreach( $i in $fileFormats )
+    #createFilterLink( $i, $lang.get("overview-fileformats-$i.name"), $lang.search-doctype )
+  #end
+  </ul>
+#end
+
+#if ( $ages.size() > 0 )
+  <h2 class="portlet-section-header">$lang.search-age:</h2>
+  <ul class="ess-age portlet-section-body">
+  #foreach( $i in $ages )
+    #createFilterLink( $i, $lang.get("overview-ages-$i.name"), $lang.search-age )
+  #end
+  </ul>
+#end
+
+#foreach( $group in $categoryGroups )
+  #if ( $group.NCategoriesWithHits > 0 )
+    <h2 class="portlet-section-header">$group.name:</h2>
+    <ul class="ess-category portlet-section-body">
+    #foreach( $i in $group.categories )
+      #createFilterLink( $i, $i.name, $group.name )
+    #end
+    </ul>
+  #end
+#end
+
+
+#end

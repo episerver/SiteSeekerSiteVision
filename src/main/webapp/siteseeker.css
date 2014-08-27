@@ -1,0 +1,194 @@
+/* Search results */
+
+.ess-result h1, .ess-result h2, .ess-result h3 {
+  display: block;
+  margin-top: 1em;
+}
+
+.ess-spelling,
+.ess-no-query,
+.ess-no-hits {
+  border: 1px solid #bdbdbd;
+  background-color: #ffffe0;
+  margin: 1em 0;
+  padding: 0.5em 1em;
+}
+.ess-spelling h2 {
+  font-size: 1.2em;
+  margin-top: 0.3em;
+  font-weight: bold;
+}
+.ess-spelling ul { 
+  margin: 0.5em 0; 
+  padding: 0 0 0 1.5em;
+}
+.ess-spelling li { 
+  margin: 0.5em 0;
+}
+
+.ess-pagenav { 
+  text-align: center;
+  margin: 2em 0;
+}
+
+/* Best bets */
+
+.ess-bestbets dt {
+    padding: 0.5em;
+    border: 1px solid #666;
+    border-bottom: none;
+    margin: 1em 0 0 0;
+    font-size: 1.25em;
+}
+.ess-bestbets dd {
+    padding: 0.5em;
+    border: 1px solid #666;
+    border-top: none;
+    margin: 0 0 1em 0;
+}
+
+
+/* Form */
+
+.ess-form-filter-any {
+    font-weight: bold;
+}
+
+/* Hits */
+
+.ess-hits dt { 
+  margin: 1.3em 0 0 25px;
+  clear: left;
+  font-size: 1.25em;
+}
+.ess-hits dt .ess-size {
+  font-size: 0.8em;
+}
+.ess-hits dt .ess-dtypelabel {
+  font-size: 0.8em;
+}
+.ess-hits dd { 
+  margin: 0.4em 0 0.2em 25px;
+}
+.ess-hitnum {
+  width: 2.3em;
+  float: left;
+  margin-left: -2.5em;
+  font-size: 0.8em;
+  line-height: 1.7;
+  text-align: center;
+}
+.ess-hit-description { 
+  color: #777;
+}
+
+.ess-dtypelabel-icon {
+  width: 18px;
+  height: 1em; 
+  text-indent: -100em;
+  position: relative;		
+  float: left;
+  padding-right: 0.5em;
+  margin-top: 0.2em;
+  background-repeat: no-repeat;
+  background-position: 0 50%;
+}
+
+.ess-dtypelabel-icon.html {
+  background-image: url('/siteseeker-search/icons/fileformats/icon_html.gif');
+}
+.ess-dtypelabel-icon.pdf {
+  background-image: url('/siteseeker-search/icons/fileformats/icon_pdf.gif');
+}
+.ess-dtypelabel-icon.any {
+  background-image: url('/siteseeker-search/icons/fileformats/icon_misc.gif');
+}
+.ess-dtypelabel-icon.ppt {
+  background-image: url('/siteseeker-search/icons/fileformats/icon_ppt.gif');
+}
+.ess-dtypelabel-icon.doc {
+  background-image: url('/siteseeker-search/icons/fileformats/icon_doc.gif');
+}
+.ess-dtypelabel-icon.xls {
+  background-image: url('/siteseeker-search/icons/fileformats/icon_xls.gif');
+}
+.ess-dtypelabel-icon.text {
+  background-image: url('/siteseeker-search/icons/fileformats/icon_text.gif');
+}
+.ess-dtypelabel-icon.img {
+  background-image: url('/siteseeker-search/icons/fileformats/icon_img.gif');
+}
+.ess-dtypelabel-icon.rtf {
+  background-image: url('/siteseeker-search/icons/fileformats/icon_rtf.gif');
+}
+
+.ess-attachments li {
+  background: url('/siteseeker-search/icons/attachment.png') no-repeat left transparent;
+  list-style: none;
+  padding-left: 15px;
+}
+
+.ess-info {
+  color: green;
+}
+
+/* Overview */
+
+.ess-overview h2 { 
+  font-weight: bold;
+  margin: 1em 0 0.3em 0;
+  display: block;
+}
+.ess-overview ul { 
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.ess-overview li { 
+  margin: 0;
+  padding: 0.2em 0.5em;
+  overflow: auto;
+}
+.ess-overview li.ess-selected { 
+  background: #ddd;
+}
+
+.ess-overview a,
+.ess-overview span.ess-selected { 
+  float: left;
+  width: 70%;
+}
+
+.ess-hitcount {
+  float: right;
+  font-size: 0.9em;
+  font-weight: bold;
+}
+.ess-hitcount-label { 
+  display: none;
+}
+
+
+/* Search term highlight */
+.ess-info .ess-cleartexturl strong,
+.ess-hit-extract strong,
+.ess-hit-description-text strong,
+.ess-hits dt a strong {
+  background: #FFF9CA;
+}
+.ess-hits dt a strong {
+  text-decoration: underline;
+}
+
+/* Search provider (in footer) */
+
+.ess-search-provider { 
+  color: #999;
+  margin: 3em 0 0.5em;
+  text-align: center;
+ }
+.ess-search-provider a:link,
+.ess-search-provider a:visited { 
+  color: #999;
+  font-weight: bold;
+}

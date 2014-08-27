@@ -1,0 +1,37 @@
+#foreach( $group in $categoryGroups )
+<p>$group.name:<br />
+  #foreach( $i in $group.categories )
+  <input type="checkbox" name="$requestParameters.Categories" id="$requestParameters.Categories$i.id"
+         value="$i.id" #if($i.isSelected)checked="checked"#end
+         onclick="if (this.checked) document.getElementById('categories-selected-$requestParameters.Categories').checked = true;" />
+  <label for="$requestParameters.Categories$i.id">$i.name</label><br />
+  #end
+</p>
+#end
+
+<p>
+  #foreach( $i in $ages )
+  <input type="radio" name="$requestParameters.Age" id="$requestParameters.Age$i.id" 
+         value="$i.id" #if($i.isSelected)checked="checked"#end />
+  <label for="$requestParameters.Age$i.id" class="ess-form-filter-$i.name">$lang.get("form-ages-$i.name")</label><br />
+  #end
+</p>
+
+<p>
+  #foreach( $i in $fileFormats )
+    <input type="radio" name="$requestParameters.FileFormat" id="$requestParameters.FileFormat$i.id" 
+           value="$i.id" #if($i.isSelected)checked="checked"#end />
+    <label for="$requestParameters.FileFormat$i.id" class="ess-form-filter-$i.name">$lang.get("form-fileformats-$i.name")</label><br />
+    #end
+</p>
+
+<p>
+  #foreach( $i in $languages )
+  <input type="radio" name="$requestParameters.Language" id="$requestParameters.Language$i.id" 
+         value="$i.id" #if($i.isSelected)checked="checked"#end />
+  <label for="$requestParameters.Language$i.id" class="ess-form-filter-$i.name">$lang.get("form-languages-$i.name")</label><br />
+  #end
+</p>
+
+
+

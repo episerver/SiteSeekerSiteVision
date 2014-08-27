@@ -1,0 +1,184 @@
+<meta name="ROBOTS" Content="NOINDEX,NOFOLLOW" />
+<SCRIPT language="JavaScript1.2" type="text/javascript">
+<!--
+
+/* Copyright (c) 2002-2004 Euroling AB */
+
+var SIPN_note, SIPN_noteInfo, SIPN_noteToggle, SIPN_posY;
+var SIPN_offsetY = 0;
+var SIPN_widthX = 252;
+var SIPN_theTop = SIPN_offsetY;
+var SIPN_old = SIPN_theTop;
+var SIPN_kwicFirst = '$firstAnchor';
+var SIPN_kwicCurrent = '';
+var SIPN_kwicLast = '$lastAnchor';
+
+
+function SiteSeekerGetObj(name) {
+  if (document.getElementById) {
+    this.obj = document.getElementById(name);
+    this.style = document.getElementById(name).style;
+  } else if (document.all) {
+    this.obj = document.all[name];
+    this.style = document.all[name].style;
+  } else if (document.layers) {
+    this.obj = document.layers[name];
+    this.style = document.layers[name];
+  }
+}
+
+function SiteSeekerInit() {
+  SIPN_note = new SiteSeekerGetObj('SiteSeekerNote');
+  SIPN_noteInfo = new SiteSeekerGetObj('SiteSeekerNoteInfo');
+  SIPN_noteToggle = new SiteSeekerGetObj('SiteSeekerNoteToggle');
+  SiteSeekerMoveMenu();
+  window.onresize = SiteSeekerResize;
+  SiteSeekerResize();
+  temp = setTimeout('SiteSeekerHideNote()', 2000);
+}
+
+function SiteSeekerResize() {
+  if (window.innerWidth) {
+    posX = window.innerWidth - SIPN_widthX;
+  } else if (document.body.clientWidth) {
+    posX = document.body.clientWidth - SIPN_widthX;
+  }
+  SIPN_note.style.left = posX + 'px';
+}
+
+function SiteSeekerHideNote() {
+  SIPN_noteInfo.style.display = 'none';
+  SIPN_noteToggle.obj.innerHTML = '$lang.kwic-showinfo';
+}
+
+function SiteSeekerShowHideNote() {
+  if (SIPN_noteInfo.style.display != 'none') {
+    SIPN_noteInfo.style.display = 'none';
+    SIPN_noteToggle.obj.innerHTML = '$lang.kwic-showinfo';
+  } else {
+    SIPN_noteInfo.style.display = 'block';
+    SIPN_noteToggle.obj.innerHTML = '$lang.kwic-hideinfo';
+  }
+}
+
+function SiteSeekerMoveMenu() {
+  if (window.innerHeight)       {
+    SIPN_posY = window.pageYOffset;
+  } else if (document.documentElement && document.documentElement.scrollTop) {
+    SIPN_posY = document.documentElement.scrollTop;
+  } else if (document.body) {
+    SIPN_posY = document.body.scrollTop;
+  }
+  
+  if (SIPN_posY < SIPN_theTop) {
+    SIPN_posY = SIPN_theTop;
+  } else {
+    SIPN_posY += SIPN_offsetY;
+  }
+  
+  if (SIPN_posY == SIPN_old) {
+    SIPN_note.style.top = SIPN_posY + 'px';
+  }
+  SIPN_old = SIPN_posY;
+  temp = setTimeout('SiteSeekerMoveMenu()', 100);
+}
+
+function SiteSeekerGoToNext() {
+  if (SIPN_kwicCurrent == '' || SIPN_kwicCurrent == SIPN_kwicLast)
+    SIPN_kwicCurrent = SIPN_kwicFirst;
+  else
+    SIPN_kwicCurrent = SIPN_kwicCurrent.slice(0, 5) + (parseInt(SIPN_kwicCurrent.slice(5)) + 1);
+  window.location.hash = SIPN_kwicCurrent;
+  if (o = document.getElementById('SiteSeekerWordMark' + SIPN_kwicCurrent.slice(5)))
+    temp = setTimeout('SiteSeekerFlash(' + SIPN_kwicCurrent.slice(5) + ', 6)', 100);
+}
+
+function SiteSeekerGoToPrev() {
+  if (SIPN_kwicCurrent == '' || SIPN_kwicCurrent == SIPN_kwicFirst)
+    SIPN_kwicCurrent = SIPN_kwicLast;
+  else
+    SIPN_kwicCurrent = SIPN_kwicCurrent.slice(0, 5) + (parseInt(SIPN_kwicCurrent.slice(5)) - 1);
+  window.location.hash = SIPN_kwicCurrent;
+  if (o = document.getElementById('SiteSeekerWordMark' + SIPN_kwicCurrent.slice(5)))
+    temp = setTimeout('SiteSeekerFlash(' + SIPN_kwicCurrent.slice(5) + ', 6)', 100);
+}
+
+function SiteSeekerFlash(name, num) {
+  if (num == 0) {
+    if (o = document.getElementById('SiteSeekerWordMark' + SIPN_kwicCurrent.slice(5))) {
+      o.style.color = '#000000';
+    }
+    return; 
+  }
+  for (var i = SIPN_kwicFirst.slice(5); i <= SIPN_kwicLast.slice(5); i++) {
+    if (o = document.getElementById('SiteSeekerWordMark' + i)) {
+      o.style.color = '#000000';
+      o.style.border = 'none';
+    }
+  }
+  if (o = document.getElementById('SiteSeekerWordMark' + SIPN_kwicCurrent.slice(5))) {
+    o.style.border = '2px solid #FF0000';
+    if (num & 1) 
+      o.style.color = '#FF0000';
+    else
+      o.style.color = '#FFFFFF';
+    temp = setTimeout('SiteSeekerFlash(' + SIPN_kwicCurrent.slice(5) + ', ' + (num - 1) + ')', 100);
+  }
+
+}
+
+// -->
+				</SCRIPT>
+				<STYLE type="text/css">
+
+  /* Copyright (c) 2002-2004 Euroling AB */
+
+  #SiteSeekerNote {
+  width: 250px; 
+  border: 1px solid #afaf9a; 
+  background-color: #ffffe1;
+  font-family: Tahoma, Verdana, sans-serif; 
+  font-size: 11px;
+  position: absolute; 
+  left: 300px; 
+  top: 0px; 
+  z-index: 20;
+  background-position: 50% 100%;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  }
+  #SiteSeekerNote.SiteSeekerLogo {
+  }
+  #SiteSeekerNote p {
+  margin: 0px 4px 4px 4px;
+  }
+  #SiteSeekerNote a {
+  font-size: 11px;
+  color: #0000af;
+  text-decoration: underline;
+  }
+  p#SiteSeekerNoteHeader {
+  margin: 0px 0px 0px 0px;
+  background-color: #bfbfa7;
+  font-weight: bold;
+  padding: 4px 4px 4px 4px;
+  color: #000;
+  text-shadow: 0px 0px 4px #fff;
+  background-position: 3px 50%;
+  background-repeat: no-repeat;
+  text-transform: uppercase;
+  }
+  #SiteSeekerNoteShowHide {
+  display: block;
+  float: right;
+  text-transform: none;
+  }
+  #SiteSeekerNoteInfo {
+  padding-top: 4px;
+  }
+  p#SiteSeekerNoteReturnLink {
+  margin-top: 8px;
+  font-weight: bold;
+  text-align: right;
+  }
+</STYLE>

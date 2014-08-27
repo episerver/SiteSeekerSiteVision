@@ -1,0 +1,110 @@
+<form action="$url" method="post" accept-charset="UTF-8">
+  <script type="text/javascript" src="/siteseeker-search/editscript.js"></script>
+
+  <div id="header">
+    <h1><span id="logo">SiteSeeker &middot;</span> $lang.editmode-editsearchpage</h1>
+    <ul id="toptabs">
+      <li id="settingsTab">
+        <a href="#">$lang.editmode-connectionandconstraints</a>
+      </li>
+      <li id="templatesTab">
+        <a href="#">$lang.editmode-templates</a>
+      </li>
+    </ul>
+  </div>
+  <div class="pane" id="settings">
+    <fieldset>
+      <legend>$lang.editmode-webservice</legend>
+      <div class="mandatory">
+	<label for="ws-url"><strong>URL:</strong></label>
+	<input type="text" name="ws-url" id="ws-url" 
+               onkeyup="if (this.value != this.defaultValue) this.className = 'changed'; else this.className = '';"
+               value="$connection.Url" /><br />
+        <a href="http://faq.siteseeker.se/webbtjanst_url.html" class="help" rel="external" id="ws-help">Vad ska jag skriva här?</a>
+      </div>
+      <label for="ws-username">$lang.editmode-username:</label>
+      <input type="text" name="ws-username" id="ws-username" 
+             onkeyup="if (this.value != this.defaultValue) this.className = 'changed'; else this.className = '';"
+             value="$connection.Username" /><br />
+      <label for="ws-password">$lang.editmode-password:</label>
+      <input type="password" name="ws-password" id="ws-password" 
+             onkeyup="if (this.value != this.defaultValue) this.className = 'changed'; else this.className = '';"
+             value="$connection.Password" /><br />
+    </fieldset>
+    <fieldset>
+      <legend>$lang.editmode-constraints</legend>
+      <label for="query-extension">$lang.editmode-queryextension:</label>
+      <input type="text" name="query-extension" id="query-extension" 
+             onkeyup="if (this.value != this.defaultValue) this.className = 'changed'; else this.className = '';"
+             value="$queryExtension" /><br />
+      <p style="padding-left: 11em;">
+        #if ( $autoQuery == "" )
+          <input type="checkbox" id="auto-query" name="auto-query" />
+        #else
+          <input type="checkbox" id="auto-query" name="auto-query" checked="checked" />
+        #end
+        <label class="checkbox" for="auto-query">$lang.auto-query</label>
+      </p>
+    </fieldset>
+    	#if ( $warning == "WARNING_PAGE_VISIBLE_TO_SEARCH_ENGINES" ) 
+    	   <fieldset>
+    		<b>$lang.editmode-warning:<br></b>$lang.editmode-pagevisibletosearchengines.<br>
+		</fieldset>
+    	#end
+
+   </div>
+
+ 
+
+  <div class="pane" id="templates">
+    #foreach ( $t in $templates )
+    <fieldset id="template-$t.Name">
+      <legend>$lang.get($t.Name)</legend>
+      <p>
+        <input id="${t.Name}-use-custom" type="checkbox" value="on"
+               name="${t.Name}-use-custom" onclick="activateTemplate(this, '$t.Name');" 
+               #if ( $t.UseCustom )
+               checked="checked"
+               #end
+               />
+        <label for="${t.Name}-use-custom" class="checkbox">$lang.editmode-usecustomtemplate</label>
+      </p>
+      <div class="template-code" id="$t.Name" 
+         #if ( !$t.UseCustom )
+         style="display: none"
+         #end
+         >
+        #if ( $t.CustomContent != "" )
+        <textarea name="${t.Name}-tmpl" id="${t.Name}-tmpl" rows="20" cols="60" onclick="document.getElementById('template-$t.Name').className = 'expanded'; return false;" onkeyup="templateChanged(this, '$t.Name')">$t.CustomContent</textarea>
+        #else
+        <textarea name="${t.Name}-tmpl" id="${t.Name}-tmpl" rows="20" cols="60" onclick="document.getElementById('template-$t.Name').className = 'expanded'; return false;" onkeyup="if (this.value != this.defaultValue) this.className = 'changed'; else this.className = '';">$t.DefaultContent</textarea>
+        #end
+        <textarea id="${t.Name}-default" style="display: none">$t.DefaultContent</textarea>
+        <div class="fold fold-up">
+          &uarr; <a href="#" onclick="document.getElementById('template-$t.Name').className = ''; return false;">$lang.editmode-minimize</a>
+        </div>
+        <div class="fold fold-down">
+          &darr; <a href="#" onclick="document.getElementById('template-$t.Name').className = 'expanded'; return false;">$lang.editmode-maximize</a>
+        </div>
+        <div class="revert" id="revert-$t.Name"
+             #if ( !$t.isCustomized() )
+             style="display: none"
+             #end
+             >
+          <a href="#" onclick="revertTemplate('$t.Name', '$lang.editmode-reverttodefaultwarning.'); return false;">$lang.editmode-reverttodefault</a>
+        </div>
+      </div>
+    </fieldset>
+    #end
+
+    <p><a href="/siteseeker-search/api.html" class="help" rel="external" id="api-help">Referens för mall-API</a></p>
+
+  </div>
+  <div id="footer">
+    <div>
+      <input type="submit" name="submit-close" class="save" value="$lang.editmode-saveandclose" />
+      <input type="submit" name="cancel" class="cancel" onclick="window.close()" value="$lang.editmode-cancel" />
+    </div>
+  </div>
+</form>
+

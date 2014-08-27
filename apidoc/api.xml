@@ -1,0 +1,767 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN" "http://docbook.org/xml/4.2/docbookx.dtd">
+<article>
+  <title>Velocity Context for SiteSeeker Search Templates</title>
+
+  <sect1>
+    <para>
+      This document describes the objects within the Velocity Context that are available 
+      from the Search Templates included with the SiteSeeker Search module for 
+      SiteVision.
+    </para>
+  </sect1>
+  <sect1>
+    <title>Global response objects</title>
+      <para>
+        In addition to the objects listed below, the GenericTools are available. Documentaion can be found at the <ulink url="http://velocity.apache.org/tools/releases/2.0/generic.html">Apache Velocity Project home page</ulink>.
+      </para>
+    <table>
+      <tgroup cols="3">
+        <thead>
+          <row>
+            <entry>Object</entry>
+            <entry>Type</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <!--
+          <row>
+            <entry><code>$</code></entry>
+            <entry><code><link linkend="" endterm="type."/>[]</code></entry>
+            <entry></entry>
+          </row>
+
+          <row>
+            <entry><code>$</code></entry>
+            <entry><code>TODO</code></entry>
+            <entry>TODO</entry>
+          </row>
+          -->
+          <row>
+            <entry><code>$ages</code></entry>
+            <entry><code><link linkend="Age" endterm="type.Age"/>[]</code></entry>
+            <entry><emphasis>Age filter: List of available options.</emphasis> The age filter narrows down the query by modification date, e.g. "last week".</entry>
+          </row>
+          <row>
+            <entry><code>$bestBets</code></entry>
+            <entry><code><link linkend="BestBet" endterm="type.BestBet"/>[]</code></entry>
+            <entry><emphasis>List of Best Bets.</emphasis> Best Bets are hits that are similar to "sponsored links" and are added by SiteSeeker administrators.</entry>
+          </row>
+          <row>
+            <entry><code>$categoryGroups</code></entry>
+            <entry><code><link linkend="CategoryGroup" endterm="type.CategoryGroup"/>[]</code></entry>
+            <entry><emphasis>Category filter: List of available options, divided by category group.</emphasis> 
+              Each category group contains a list of categories;
+              <code><link linkend="Category" endterm="type.Category"/>[]</code>
+            </entry>
+          </row>
+          <row>
+            <entry><code>$fileFormats</code></entry>
+            <entry><code><link linkend="FileFormat" endterm="type.FileFormat"/>[]</code></entry>
+            <entry><emphasis>File format filter: List of available options.</emphasis> The file format filter narrows down the query by file format, e.g. "html" or "pdf".</entry>
+          </row>
+          <row>
+            <entry><code>$hits</code></entry>
+            <entry><code><link linkend="Hit" endterm="type.Hit"/>[]</code></entry>
+            <entry><emphasis>List of hits.</emphasis></entry>
+          </row>
+          <row>
+            <entry><code>$lang</code></entry>
+            <entry><code><link linkend="LanguageResource" endterm="type.LanguageResource"/></code></entry>
+            <entry><emphasis>Localisation manager.</emphasis> Provides a localised version of a text string for display on the search page.</entry>
+          </row>
+          <row>
+            <entry><code>$languages</code></entry>
+            <entry><code><link linkend="Language" endterm="type.Language"/>[]</code></entry>
+            <entry><emphasis>Language filter: List of available options.</emphasis> The language filter narrows down the query by language, e.g. "English".</entry>
+          </row>
+          <row>
+            <entry><code>$message</code></entry>
+            <entry><code>String</code></entry>
+            <entry>A natural language message describing the interpreted query and the number of results, to be displayed to the user, e.g. "45 hits for annual report in Press Room".</entry>
+          </row>
+          <row>
+            <entry><code>$pageLinks</code></entry>
+            <entry><code><link linkend="PageLink" endterm="type.PageLink"/>[]</code></entry>
+            <entry><emphasis>Pagination links.</emphasis> Use this list of links to implement a pagination widget.</entry>
+          </row>
+          <row>
+            <entry><code>$portletId</code></entry>
+            <entry><code>String</code></entry>
+            <entry>Identifier of this portlet instance.</entry>
+          </row>
+          <row>
+            <entry><code>$query</code></entry>
+            <entry><code>String</code></entry>
+            <entry>Search query.</entry>
+          </row>
+          <row>
+            <entry><code>$requestParameters</code></entry>
+            <entry><code><link linkend="RequestParameters" endterm="type.RequestParameters"/></code></entry>
+            <entry>The names of the request parameters handled by the SiteSeeker search portlet.</entry>
+          </row>
+          <row>
+            <entry><code>$searchPageId</code></entry>
+            <entry><code>String</code></entry>
+            <entry>The SiteVision identifier of the current page.</entry>
+          </row>
+          <row>
+            <entry><code>$sessionId</code></entry>
+            <entry><code>String</code></entry>
+            <entry>The current user's browser session identifier.</entry>
+          </row>
+          <row>
+            <entry><code>$sortOrders</code></entry>
+            <entry><code><link linkend="SortOrder" endterm="type.SortOrder"/>[]</code></entry>
+            <entry>
+              The following predefined sort orders:
+              <itemizedlist>
+                <listitem><code>$sortOrders<code>.Relevance</code></code></listitem>
+                <listitem><code>$sortOrders<code>.Title</code></code></listitem>
+                <listitem><code>$sortOrders<code>.Date</code></code></listitem>
+                <listitem><code>$sortOrders<code>.Category</code></code></listitem>
+                <listitem><code>$sortOrders<code>.Random</code></code></listitem>
+              </itemizedlist>
+            </entry>
+          </row>
+          <row>
+            <entry><code>$spellingSuggestions</code></entry>
+            <entry><code><link linkend="SpellingSuggestion" endterm="type.SpellingSuggestion"/>[]</code></entry>
+            <entry>List of spelling suggestions.</entry>
+          </row>
+          <row>
+            <entry><code>$uiLanguage</code></entry>
+            <entry><code>String</code></entry>
+            <entry>Contains the language code for this page, which will either be the empty string or a lowercase ISO 639 code.</entry>
+          </row>
+          <row>
+            <entry><code>$url</code></entry>
+            <entry><code>String</code></entry>
+            <entry>The URL for the portlet. Use this in the action attribute of the HTML form.</entry>
+          </row>
+          <row>
+            <entry><code>$util</code></entry>
+            <entry><code><link linkend="SearchPortletUtil" endterm="type.SearchPortletUtil"/>[]</code></entry>
+            <entry>Collection of methods for (un)escaping XML and encode/decode URL strings.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </sect1>
+
+  <sect1>
+    <title>Types</title>
+
+    <!--
+    <table id="">
+      <title id="type."></title>
+      <tgroup cols="3">
+        <thead>
+          <row>
+            <entry>Property</entry><entry>Type</entry><entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry></entry>
+            <entry></entry>
+            <entry></entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+    -->
+
+
+    <table id="Age">
+      <title id="type.Age">Age</title>
+      <para>
+        Represents an age filter option.
+      </para>
+      <tgroup cols="3">
+        <thead>
+          <row>
+            <entry>Property</entry><entry>Type</entry><entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry><code>.ClickUrl</code></entry>
+            <entry><code>String</code></entry>
+            <entry>URL to the search page with this filter option applied.</entry>
+          </row>
+          <row>
+            <entry><code>.GroupName</code></entry>
+            <entry><code>String</code></entry>
+            <entry>Symbolic name of this filter, i.e. "age". The symbolic name may be used as a key for localisation.</entry>
+          </row>
+          <row>
+            <entry><code>.Id</code></entry>
+            <entry><code>Integer</code></entry>
+            <entry>The identifier of this filter option.</entry>
+          </row>
+          <row>
+            <entry><code>.IsSelected</code></entry>
+            <entry><code>Boolean</code></entry>
+            <entry>Returns true if this option is currently applied. False otherwise.</entry>
+          </row>
+          <row>
+            <entry><code>.Name</code></entry>
+            <entry><code>String</code></entry>
+            <entry>Symbolic name of this filter option (e.g. "yesterday", "week" or "any"). The symbolic name may be used as a key for localisation.</entry>
+          </row>
+          <row>
+            <entry><code>.NHits</code></entry>
+            <entry><code>Integer</code></entry>
+            <entry>Number of hits matching this filter option.</entry>
+          </row>
+          <row>
+            <entry><code>.NPages</code></entry>
+            <entry><code>Integer</code></entry>
+            <entry>Total number of pages matching this filter option (regardless of the query).</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <table id="BestBet">
+      <title id="type.BestBet">BestBet</title>
+      <tgroup cols="3">
+        <thead>
+          <row>
+            <entry>Property</entry><entry>Type</entry><entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <!--
+          <row>
+            <entry></entry><entry><code></code></entry><entry></entry>
+          </row>
+          -->
+          <row>
+            <entry>.Description</entry><entry><code>String</code></entry><entry>The description of the current best bet. May contain HTML code.</entry>
+          </row>
+          <row>
+            <entry>.IsExternal</entry><entry><code>Boolean</code></entry><entry>True if best bet is referring to an external location, false if it is a local reference.</entry>
+          </row>
+          <row>
+            <entry>.Keywords</entry><entry><code>String[]</code></entry><entry>List of keywords matching this best bet.</entry>
+          </row>
+          <row>
+            <entry>.Number</entry><entry><code>Integer</code></entry><entry>Ordinal number of this best bet.</entry>
+          </row>
+          <row>
+            <entry>.Title</entry><entry><code>String</code></entry><entry>Title of the best bet, with formatting.</entry>
+          </row>
+          <row>
+            <entry>.TitleNoFormatting</entry><entry><code>String</code></entry><entry>Title of the best bet, without formatting (HTML tags).</entry>
+          </row>
+          <row>
+            <entry>.Url</entry><entry><code>String</code></entry><entry>The URL to the content of this best bet.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <table id="Category">
+      <title id="type.Category">Category</title>
+      <para>
+        Represents a category filter option.
+      </para>
+      <tgroup cols="3">
+        <thead>
+          <row>
+            <entry>Property</entry><entry>Type</entry><entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry><code>.ClickUrl</code></entry>
+            <entry><code>String</code></entry>
+            <entry>URL to the search page with this filter option applied.</entry>
+          </row>
+          <row>
+            <entry><code>.GroupName</code></entry>
+            <entry><code>String</code></entry>
+            <entry>The localised name for the category group.</entry>
+          </row>
+          <row>
+            <entry><code>.Id</code></entry>
+            <entry><code>Integer</code></entry>
+            <entry>The identifier of this filter option.</entry>
+          </row>
+          <row>
+            <entry><code>.IsSelected</code></entry>
+            <entry><code>Boolean</code></entry>
+            <entry>Returns true if this option is currently applied. False otherwise.</entry>
+          </row>
+          <row>
+            <entry><code>.Name</code></entry>
+            <entry><code>String</code></entry>
+            <entry>The localised name for the category.</entry>
+          </row>
+          <row>
+            <entry><code>.NHits</code></entry>
+            <entry><code>Integer</code></entry>
+            <entry>Number of hits matching this filter option.</entry>
+          </row>
+          <row>
+            <entry><code>.NPages</code></entry>
+            <entry><code>Integer</code></entry>
+            <entry>Total number of pages matching this filter option (regardless of the query).</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <table id="CategoryGroup">
+      <title id="type.CategoryGroup">CategoryGroup</title>
+      <tgroup cols="3">
+        <thead>
+          <row>
+            <entry>Property</entry><entry>Type</entry><entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry><code>.Id</code></entry><entry><code>Integer</code></entry><entry>An identifier of the category group.</entry>
+          </row>
+          <row>
+            <entry><code>.Name</code></entry><entry><code>String</code></entry><entry>The name of the category group.</entry>
+          </row>
+          <row>
+            <entry><code>.Categories</code></entry>
+            <entry><code><link linkend="Category" endterm="type.Category"/>[]</code></entry>
+            <entry>The category objects of this group.</entry>
+          </row>
+          <row>
+            <entry><code>.NCategoriesWithHits</code></entry>
+            <entry><code>Integer</code></entry>
+            <entry>
+              Returns the number of categories in this group that contains one or more hits. 
+              This is useful when listing the category groups, if you want to exclude groups 
+              which do not contain any categories with hits that match the current search.
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <table id="FileFormat">
+      <title id="type.FileFormat">FileFormat</title>
+      <para>
+        Represents a file format filter option.
+      </para>
+      <tgroup cols="3">
+        <thead>
+          <row>
+            <entry>Property</entry><entry>Type</entry><entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry><code>.ClickUrl</code></entry>
+            <entry><code>String</code></entry>
+            <entry>URL to the search page with this filter option applied.</entry>
+          </row>
+          <row>
+            <entry><code>.GroupName</code></entry>
+            <entry><code>String</code></entry>
+            <entry>Symbolic name of this filter, i.e. "doctype". The symbolic name may be used as a key for localisation.</entry>
+          </row>
+          <row>
+            <entry><code>.Id</code></entry>
+            <entry><code>Integer</code></entry>
+            <entry>The identifier of this filter option.</entry>
+          </row>
+          <row>
+            <entry><code>.IsSelected</code></entry>
+            <entry><code>Boolean</code></entry>
+            <entry>Returns true if this option is currently applied. False otherwise.</entry>
+          </row>
+          <row>
+            <entry><code>.Name</code></entry>
+            <entry><code>String</code></entry>
+            <entry>Symbolic name of this filter option (e.g. "doc", "pdf" or "html"). The symbolic name may be used as a key for localisation.</entry>
+          </row>
+          <row>
+            <entry><code>.NHits</code></entry>
+            <entry><code>Integer</code></entry>
+            <entry>Number of hits matching this filter option.</entry>
+          </row>
+          <row>
+            <entry><code>.NPages</code></entry>
+            <entry><code>Integer</code></entry>
+            <entry>Total number of pages matching this filter option (regardless of the query).</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <table id="Hit">
+      <title id="type.Hit">Hit</title>
+      <para>A hit holds dynamic, i.e. query specific, and static information of
+        an indexed page matching the current search request. Hit objects are available 
+        in the <code>$hits[]</code> array.
+      </para>
+      <tgroup cols="3">
+        <thead>
+          <row>
+            <entry>Property</entry><entry>Type</entry><entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry><code>.Number</code></entry><entry><code>Integer</code></entry><entry>An ordinal number of the hit for the current search request.</entry>
+          </row>
+          <row>
+            <entry><code>.Title</code></entry><entry><code>String</code></entry><entry>The title of the indexed page.</entry>
+          </row>
+          <row>
+            <entry><code>.DynamicSnippet</code></entry><entry><code>String</code></entry><entry>A dynamic (query specific) snippet (summary) of the indexed page.
+              <!--         The dynamic snippet usually contains KWIC (Key Word In Context), where keywords are the current query terms. 
+              Keywords are formatted using HTML-&lt;strong&gt;-->
+
+            </entry>
+          </row>
+          <!--      <row>
+
+            <entry><code>.EriDesc</code></entry><entry><code>String</code></entry><entry>The value of an optional "eri-desc"-section within the indexed page. See also: <ulink url="http://www.siteseeker.se/sv/kunskapsdatabas/faq/soksidan/brodsmulor-i-trafflistan/">http://www.siteseeker.se/sv/kunskapsdatabas/faq/soksidan/brodsmulor-i-trafflistan/</ulink>.</entry>
+          </row>
+          -->
+          <row>
+            <entry><code>.Meta.&lt;name&gt;</code></entry><entry><code>String</code></entry><entry>Get the value of the typed meta data parameter <code>&lt;name&gt;</code>. If the requested meta data parameter does not exist, 
+              <code>null</code> will be returned, which can be used for selection. If it does exist, the value is a string, which optionally can be converted
+              into an integer or a float (for logical comparison). To do so, add <code>.Integer</code> or <code>.Float</code> after the meta parameter. For example, <code>#if ( $hit.Meta.Price ) $hit.Meta.Price.Integer #end</code> 
+              will print the meta data named Price, if it exists in <code>$hit</code>, converted to an Integer.</entry>
+          </row>
+          <row>
+            <entry><code>.MetaDescription</code></entry><entry><code>String</code></entry><entry>An optional meta description of the indexed page. See also: <ulink url="http://www.siteseeker.se/sv/kunskapsdatabas/faq/soksidan/metabeskrivningar/">http://www.siteseeker.se/sv/kunskapsdatabas/faq/soksidan/metabeskrivningar/</ulink>.</entry>
+          </row>
+          <row>
+            <entry><code>.MetaIdentifier</code></entry><entry><code>Integer</code></entry>
+            <entry>An optional meta identifier for the indexed page.</entry>
+          </row>
+          <row>
+            <entry><code>.Size</code></entry><entry><code>Integer</code></entry><entry>The size of the indexed page in bytes.</entry>
+          </row>
+          <row>
+            <entry><code>.StaticSnippet</code></entry><entry><code>String</code></entry><entry>The value of an optional "eri-desc"-section within the indexed page. See also: <ulink url="http://www.siteseeker.se/sv/kunskapsdatabas/faq/soksidan/brodsmulor-i-trafflistan/">http://www.siteseeker.se/sv/kunskapsdatabas/faq/soksidan/brodsmulor-i-trafflistan/</ulink> a.k.a "eri-desc"-sections.</entry>
+          </row>
+          <row>
+            <entry><code>.HumanReadableSize</code></entry><entry><code>String</code></entry><entry>The size of the indexed page in bytes, kB, MB or GB, depending of the size in bytes</entry>
+          </row>
+          <row>
+            <entry><code>.Url</code></entry><entry><code>String</code></entry><entry>The raw URL of the page.</entry>
+          </row>
+          <!--      <row>
+            <entry><code>.HtmlEncodedUrl</code></entry><entry><code>String</code></entry><entry>An HTML encoded version of 
+              Url to be displayed in a browser.</entry>
+          </row> -->
+          <row>
+            <entry><code>.CacheUrl</code></entry><entry><code>String</code></entry>
+            <entry>URL of a cached version of the indexed page with the current query terms highlighted.</entry>
+          </row>
+          <row>
+            <entry><code>.SortDate</code></entry><entry><code>String</code></entry><entry>The date and time used for sorting and filtering of the indexed page.</entry>
+          </row>
+          <row>
+            <entry><code>.YearMonthDay</code></entry><entry><code>String</code></entry><entry>The date expressed as YYYY-MM-DD.</entry>
+          </row>
+          <row>
+            <entry><code>.IsInFrame</code></entry><entry><code>Boolean</code></entry><entry>Indicates whether the indexed page was found in an HTML frame or not.</entry>
+          </row>
+          <row>
+            <entry><code>.Rank</code></entry><entry><code>Integer</code></entry><entry>The rank of the hit. Rank is an integer between 0 and 30. Higher value corresponds to higher ranking.</entry>
+          </row>
+          <row>
+            <entry><code>.FileFormat</code></entry><entry><code><link linkend="FileFormat" endterm="type.FileFormat"/></code></entry><entry>The type of the document, HTML, PDF etc.</entry>
+          </row>
+          <row>
+            <entry><code>.Categories</code></entry><entry><code><link linkend="Category" endterm="type.Category"/>[]</code></entry>
+            <entry>List of categories.</entry>
+          </row>
+          <row>
+            <entry><code>.Attachments</code></entry><entry><code><link linkend="Hit" endterm="type.Hit"/>[]</code></entry>
+            <entry>List of other hits attached to this hit.</entry>
+          </row>
+
+          <!--
+          <row>
+            <entry><code>.MetaAttributes</code></entry><entry><a href="#MetaAttribute">MetaAttribute</a>[]</entry>
+          </row>
+          -->
+        </tbody>
+      </tgroup>
+    </table>
+
+    <table id="Language">
+      <title id="type.Language">Language</title>
+      <para>
+        Represents a language filter option.
+      </para>
+      <tgroup cols="3">
+        <thead>
+          <row>
+            <entry>Property</entry><entry>Type</entry><entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry><code>.ClickUrl</code></entry>
+            <entry><code>String</code></entry>
+            <entry>URL to the search page with this filter option applied.</entry>
+          </row>
+          <row>
+            <entry><code>.GroupName</code></entry>
+            <entry><code>String</code></entry>
+            <entry>Symbolic name of this filter, i.e. "language". The symbolic name may be used as a key for localisation.</entry>
+          </row>
+          <row>
+            <entry><code>.Id</code></entry>
+            <entry><code>Integer</code></entry>
+            <entry>The identifier of this filter option.</entry>
+          </row>
+          <row>
+            <entry><code>.IsSelected</code></entry>
+            <entry><code>Boolean</code></entry>
+            <entry>Returns true if this option is currently applied. False otherwise.</entry>
+          </row>
+          <row>
+            <entry><code>.Name</code></entry>
+            <entry><code>String</code></entry>
+            <entry>Symbolic name of this filter option (e.g. "sv", "en" or "no"). The symbolic name may be used as a key for localisation.</entry>
+          </row>
+          <row>
+            <entry><code>.NHits</code></entry>
+            <entry><code>Integer</code></entry>
+            <entry>Number of hits matching this filter option.</entry>
+          </row>
+          <row>
+            <entry><code>.NPages</code></entry>
+            <entry><code>Integer</code></entry>
+            <entry>Total number of pages matching this filter option (regardless of the query).</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <table id="LanguageResource">
+      <title id="type.LanguageResource">LanguageResource</title>
+      <tgroup cols="3">
+        <thead>
+          <row>
+            <entry>Method</entry><entry>Type</entry><entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry><code>.get(String $key)</code></entry>
+            <entry><code>String</code></entry>
+            <entry>Returns the localised text string for the given <code>$key</code>.<!--TODO: refer to correct xml file of definitions.--></entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <table id="PageLink">
+      <title id="type.PageLink">PageLink</title>
+      <tgroup cols="3">
+        <thead>
+          <row>
+            <entry>Property</entry><entry>Type</entry><entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <!--
+          <row>
+            <entry><code></code></entry>
+            <entry><code></code></entry>
+            <entry></entry>
+          </row>
+          -->
+          <row>
+            <entry><code>.ClickUrl</code></entry>
+            <entry><code>String</code></entry>
+            <entry>The URL pointing at the result page.</entry>
+          </row>
+          <row>
+            <entry><code>.IsHidden</code></entry>
+            <entry><code>Boolean</code></entry>
+            <entry>Determines if this page link is hidden in the pager. A hidden page link is usually displayed as dots (...) in the pager view.</entry>
+          </row>
+          <row>
+            <entry><code>.IsSelected</code></entry>
+            <entry><code>Boolean</code></entry>
+            <entry>Determines if this page link points at the currently viewed/selected page.</entry>
+          </row>
+          <row>
+            <entry><code>.PageNumber</code></entry>
+            <entry><code>Integer</code></entry>
+            <entry>The ordinal number of the search result page that this link points at. First page has page number 1.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <table id="RequestParameters">
+      <title id="type.RequestParameters">RequestParameters</title>
+      <tgroup cols="3">
+        <thead>
+          <row>
+            <entry>Property</entry><entry>Type</entry><entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <!--
+          <row>
+            <entry><code></code></entry>
+            <entry><code></code></entry>
+            <entry></entry>
+          </row>
+          -->
+          <row>
+            <entry><code>.Query</code></entry>
+            <entry><code>String</code></entry>
+            <entry>The name of the search query parameter.</entry>
+          </row>
+<!--
+          <row>
+            <entry><code>.SortOrder</code></entry>
+            <entry><code>String</code></entry>
+            <entry>The name of the sort order parameter.</entry>
+          </row>
+-->
+          <row>
+            <entry><code>.Age</code></entry>
+            <entry><code>String</code></entry>
+            <entry>The name of the age filter parameter.</entry>
+          </row>
+          <row>
+            <entry><code>.Categories</code></entry>
+            <entry><code>String</code></entry>
+            <entry>The name of the categories filter parameter.</entry>
+          </row>
+          <row>
+            <entry><code>.FileFormat</code></entry>
+            <entry><code>String</code></entry>
+            <entry>The name of the file format filter parameter.</entry>
+          </row>
+          <row>
+            <entry><code>.Language</code></entry>
+            <entry><code>String</code></entry>
+            <entry>The name of the language filter parameter.</entry>
+          </row>
+<!--
+          <row>
+            <entry><code>.NHitsPerBatch</code></entry>
+            <entry><code>String</code></entry>
+            <entry>The name of the parameter that specifies the number of hits per batch (page) to be returned by the search engine.</entry>
+          </row>
+-->
+<!--          <row>
+            <entry><code>.BatchNumber</code></entry>
+            <entry><code>String</code></entry>
+            <entry>The name of the parameter that specifies the batch number to be returned from the search engine.</entry>
+          </row>
+-->
+<!--
+          <row>
+            <entry><code>.UseStemming</code></entry>
+            <entry><code>String</code></entry>
+            <entry></entry>
+          </row>
+-->
+<!--          <row>
+            <entry><code>.UILanguage</code></entry>
+            <entry><code>String</code></entry>
+            <entry></entry>
+          </row>
+-->
+        </tbody>
+      </tgroup>
+    </table>
+
+    <table id="SearchPortletUtil">
+      <title id="type.SearchPortletUtil">SearchPortletUtil</title>
+      <tgroup cols="3">
+        <thead>
+          <row>
+            <entry>Method</entry><entry>Type</entry><entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry><code>.escapeXml(String $xml)</code></entry><entry><code>String</code></entry>
+            <entry>
+              Escapes the characters in a String using XML entities.
+              For example: <code>"bread" &amp; "butter" &rArr; &amp;quot;bread&amp;quot; &amp;amp; &amp;quot;butter&amp;quot;</code>.
+              Supports only the five basic XML entities (<code>gt, lt, quot, amp, apos</code>). 
+              Note that unicode characters greater than 0x7f are currently escaped to their numerical \\u equivalent.
+            </entry>
+          </row>
+          <row>
+            <entry><code>.unescapeXml(String $escapedXml)</code></entry><entry><code>String</code></entry>
+            <entry>Unescapes a string containing XML entity escapes to a string containing the actual Unicode characters corresponding to the escapes.</entry>
+          </row>
+          <row>
+            <entry><code>.urlEncode(String $url)</code></entry><entry><code>String</code></entry>
+            <entry>Translates a string into <code>application/x-www-form-urlencoded</code> format.</entry>
+          </row>
+          <row>
+            <entry><code>.urlDecode(String $encodedUrl)</code></entry><entry><code>String</code></entry>
+            <entry>Decodes an <code>application/x-www-form-urlencoded</code> string.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <table id="SortOrder">
+      <title id="type.SortOrder">SortOrder</title>
+      <tgroup cols="3">
+        <thead>
+          <row>
+            <entry>Property</entry><entry>Type</entry><entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry><code>.Id</code></entry><entry><code>Integer</code></entry><entry>An identifier of the sort order.</entry>
+          </row>
+          <row>
+            <entry><code>.Name</code></entry><entry><code>String</code></entry><entry>The name of the sort order.</entry>
+          </row>
+          <row>
+            <entry><code>.SelectUrl</code></entry><entry><code>String</code></entry><entry>The URL to be used for selecting the sort order.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <table id="SpellingSuggestion">
+      <title id="type.SpellingSuggestion">SpellingSuggestion</title>
+      <tgroup cols="3">
+        <thead>
+          <row>
+            <entry>Property</entry><entry>Type</entry><entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry><code>.Terms</code></entry><entry><code>String</code></entry><entry>The suggested terms.</entry>
+          </row>
+          <row>
+            <entry><code>.TermsNoFormatting</code></entry><entry><code>String</code></entry><entry>Same as <code>.Terms</code> but without HTML markup.</entry>
+          </row>
+          <row>
+            <entry><code>.RequestUrl</code></entry><entry><code>String</code></entry><entry>The URL to be used for sending a new search request with the suggested query terms.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+
+  </sect1>
+</article>
+

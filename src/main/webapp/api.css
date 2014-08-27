@@ -1,0 +1,37 @@
+body {
+  font-family: verdana, sans-serif;
+}
+
+code {
+  font-family: monospace, fixed;
+  color: black;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  -moz-border-radius-topleft: 1em;
+  -moz-border-radius-topright: 1em;
+}
+
+tr:nth-child(even) {
+  background: #def;
+}
+
+td, th {
+  padding: .5em;
+  border: 1px solid silver;
+}
+
+th {
+  background: lightgray;
+  color: darkred;
+  font-size: 1.2em;
+  text-align: left;
+}
+
+.emphasis em {
+  font-weight: bold;
+  font-style: normal;
+}
+

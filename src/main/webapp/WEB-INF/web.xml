@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
+<web-app>
+   <display-name>SiteSeeker search portlet</display-name>
+
+   <servlet>
+    <servlet-name>AjaxSearchServlet</servlet-name>
+    <servlet-class>siteseeker.web.AjaxSearchServlet</servlet-class>
+    <init-param>
+      <param-name>configFilePath</param-name>
+      <param-value>/tmp/siteseeker-config</param-value>
+    </init-param>
+  </servlet>
+
+  <!-- mapping a url to use the servlet -->
+  <servlet-mapping>
+   <url-pattern>/SiteSeekerAjaxServlet</url-pattern>
+   <servlet-name>AjaxSearchServlet</servlet-name>
+  </servlet-mapping>
+
+
+   <servlet>
+    <servlet-name>CacheSearchServlet</servlet-name>
+    <servlet-class>siteseeker.web.CacheSearchServlet</servlet-class>
+    <init-param>
+      <param-name>configFilePath</param-name>
+      <param-value>/tmp/siteseeker-config</param-value>
+    </init-param>
+  </servlet>
+
+  <!-- mapping a url to use the servlet -->
+  <servlet-mapping>
+   <url-pattern>/SiteSeekerCacheServlet</url-pattern>
+   <servlet-name>CacheSearchServlet</servlet-name>
+  </servlet-mapping>
+
+
+
+   <!-- Use english as default for all i18n:ized jstl -->
+   <context-param>
+      <param-name>javax.servlet.jsp.jstl.fmt.locale</param-name>
+      <param-value>en</param-value>
+   </context-param>
+
+   <!-- Use english if specified locale is unknown or has no matching bundle -->
+   <context-param>
+      <param-name>javax.servlet.jsp.jstl.fmt.fallbackLocale</param-name>
+      <param-value>en</param-value>
+   </context-param>
+</web-app>

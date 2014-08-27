@@ -1,0 +1,35 @@
+<!--eri-no-index-->
+#* include JavaScript *#
+<script type="text/javascript" src="/siteseeker-search/siteseeker.js"></script>
+<script type="text/javascript">ess_activateClickTracking('$sessionId', '$portletId', '$uiLanguage');</script>
+
+#parse("form")
+
+<div class="ess-result" style="float: left; width: 38em;">
+
+ #* Status message *#
+ <h1 class="portlet-section-header" style="font-weight: normal;">$message</h1>
+
+ #set ( $tabindex = 2 )
+ 
+ #parse("best-bets")
+
+ #parse("hits")
+
+ #* Page numbers *#
+ #parse("page-numbers")
+
+ <p class="ess-search-provider portlet-section-text portlet-font-dim">
+   $lang.search-providedby 
+   <a href="http://www.siteseeker.se/" title="$lang.search-eurolingsiteseeker">Euroling SiteSeeker</a>
+ </p>
+</div>
+
+<div class="ess-overview" style="float: left; padding-left: 1em; width: 14em;">
+  
+  #parse("overview")
+
+</div>
+
+<div style="clear: both;"></div>
+<!--/eri-no-index-->

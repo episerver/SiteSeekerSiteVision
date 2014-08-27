@@ -1,0 +1,215 @@
+<?xml version="1.0"?>
+
+<!-- ======================================================================= -->
+<!-- Build file                                                              -->
+<!-- ======================================================================= -->
+
+<project name="SiteSeeker search" default="create-app" basedir="..">
+   <!-- =================================================================== -->
+   <!-- Initialization                                                      -->
+   <!-- =================================================================== -->
+   <target name="init">
+      <property name="src.dir" value="${basedir}/src/main"/>
+
+      <property name="build.dir" value="${basedir}/build"/>
+      <property name="dist.dir" value="${basedir}/dist"/>
+
+      <property file="${src.dir}/../build.properties"/>
+      <property file="${src.dir}/../project.properties"/>
+
+      <property name="dest.dir" value="${sitevision.dir}/custom/deploy"/>
+      <property name="apidoc.dir" value="${basedir}/apidoc"/>
+      <property name="war.dir" value="${build.dir}/${name}"/>
+
+      <property name="test-dir" value="${basedir}/src/test" />
+
+      <!-- =================================================================== -->
+      <!-- Define class path                                                   -->
+      <!-- =================================================================== -->
+      <path id="project.class.path">
+         <!-- Add portlet app jar files -->
+         <fileset dir="${basedir}/lib">
+            <include name="**/*.jar"/>
+         </fileset>
+
+         <!-- Add jar files from SiteVision -->
+         <!--<fileset dir="${sitevision.dir}/app/common/lib">
+            <include name="**/*.jar"/>
+         </fileset>-->
+         <fileset dir="${sitevision.dir}/tomcat/webapps/ROOT/WEB-INF/lib">
+            <include name="**/*.jar"/>
+         </fileset>
+          <fileset dir="${sitevision.dir}/tomcat/lib">
+              <include name="**/*.jar"/>
+          </fileset>
+
+          <!-- Add classes in SiteVision -->
+         <!--<pathelement path="${sitevision.dir}/app/common/classes"/>-->
+
+         <!-- append the external classpath lastly -->
+         <pathelement path="${java.class.path}"/>
+      </path>
+
+      <path id="test.class.path">
+	<pathelement location="/Projects/Java/Lib/junit.jar" />
+	<pathelement location="${test-dir}" />
+	<path refid="project.class.path" />
+      </path>
+
+   </target>
+
+   <!-- =================================================================== -->
+   <!-- Prepares the parameters directory                                        -->
+   <!-- =================================================================== -->
+   <target name="prepare" depends="init">
+      <mkdir dir="${war.dir}/WEB-INF/classes"/>
+      <mkdir dir="${war.dir}/WEB-INF/lib"/>
+      <mkdir dir="${dist.dir}"/>
+   </target>
+
+   <!-- =================================================================== -->
+   <!-- Compiles the source code                                            -->
+   <!-- =================================================================== -->
+   <target name="compile" depends="prepare">
+      <javac srcdir="${src.dir}/java"
+         destdir="${war.dir}/WEB-INF/classes"
+         debug="${compile.debug}"
+         deprecation="${compile.deprecation}"
+         optimize="${compile.optimize}">
+         <classpath refid="project.class.path"/>	
+<!--	 <compilerarg value="-Xlint"/> -->
+      </javac>
+   </target>
+
+   <!-- =================================================================== -->
+   <!-- Copy siteseeker.web resources                                                  -->
+   <!-- =================================================================== -->
+   <target description="Copy siteseeker.web files" name="copy-web" depends="prepare">
+      <!-- Copy libraries -->
+      <copy todir="${war.dir}/WEB-INF/lib">
+         <fileset dir="${basedir}/lib/web"/>
+      </copy>
+
+      <!-- Copy siteseeker.web files -->
+      <copy todir="${war.dir}">
+         <fileset dir="${src.dir}/../resources"/>
+      </copy>
+   </target>
+
+   <!-- =================================================================== -->
+   <!-- Copy Java resources                                                 -->
+   <!-- =================================================================== -->
+   <target description="Copy Java resources" name="copy-resources" depends="prepare">
+      <copy todir="${war.dir}/WEB-INF/classes">
+         <fileset dir="${src.dir}/java" excludes="**/*.java"/>
+      </copy>
+      <copy todir="${war.dir}/WEB-INF/classes">
+         <fileset dir="${src.dir}/../velocity" />
+      </copy>
+      
+
+      <copy todir="${war.dir}/WEB-INF/classes" file="${basedir}/version.txt" />
+<!--      <copy todir="${war.dir}/WEB-INF/classes">
+        <fileset dir="${basedir}/../lib">
+	  <include name="SiteSeeker.wsdl" />
+	</fileset>
+      </copy>
+-->
+   </target>
+
+
+   <!-- =================================================================== -->
+   <!-- Build release                                                           -->
+   <!-- =================================================================== -->
+   <target description="Build a new release" name="create-release" depends="create-war">
+      <zip zipfile="${dist.dir}/${name}.war">
+         <fileset dir="${war.dir}"/>
+      </zip>
+   </target>
+
+   <!-- =================================================================== -->
+   <!-- Build WAR                                                           -->
+   <!-- =================================================================== -->
+   <target description="Create portlet application" name="create-war" depends="prepare">
+      <zip zipfile="${dist.dir}/${name}.war">
+         <fileset dir="${war.dir}"/>
+      </zip>
+   </target>
+
+   <!-- =================================================================== -->
+   <!-- Create API documentation                                            -->
+   <!-- =================================================================== -->
+   <target description="Create the API documentation" name="create-apidoc" depends="prepare">
+      <exec executable="make" dir="${apidoc.dir}"/>
+      <copy todir="${war.dir}" file="${apidoc.dir}/api.html"/>
+      <copy todir="${war.dir}" file="${apidoc.dir}/api.css"/>
+   </target>
+
+   <!-- =================================================================== -->
+   <!-- Creates the application                                             -->
+   <!-- =================================================================== -->
+   <target description="Create portlet application" name="create-app" depends="prepare,compile,copy-web,copy-resources, create-apidoc, create-war">
+   </target>
+
+   <!-- =================================================================== -->
+   <!-- Create and redeploy                                                 -->
+   <!-- =================================================================== -->
+   <target description="Only compile" name="create-deploy" depends="create-app,deploy">
+   </target>
+
+   <!-- =================================================================== -->
+   <!-- Compile and redeploy                                                -->
+   <!-- =================================================================== -->
+   <target description="Only compile" name="compile-deploy" depends="prepare,compile,create-war,deploy">
+   </target>
+
+   <!-- =================================================================== -->
+   <!-- Redeploy                                                            -->
+   <!-- =================================================================== -->
+   <target description="Deploy" name="deploy" depends="prepare">
+      <!-- Touch descriptor to redeploy, if deployed in exploded mode -->
+      <copy todir="${dest.dir}" file="${dist.dir}/${name}.war"/>
+      <touch file="${dest.dir}/${name}.war"/>
+   </target>
+
+   <!-- =================================================================== -->
+   <!-- Creates the API documentation                                       -->
+   <!-- =================================================================== -->
+   <target name="javadocs" depends="prepare">
+      <javadoc packagenames="${packages}"
+         sourcepath="${src.dir}/java"
+         destdir="${dist.dir}/docs/api"
+         author="true"
+         version="true"
+         windowtitle="${Name} API"
+         doctitle="${Name}"
+         classpathref="project.class.path"
+         bottom="Copyright &#169; ${copyrightYear} ${author} All Rights Reserved.">
+      </javadoc>
+   </target>
+
+   <!-- =================================================================== -->
+   <!-- Cleans up generated stuff                                           -->
+   <!-- =================================================================== -->
+   <target name="clean" depends="init">
+      <delete dir="${build.dir}"/>
+      <delete dir="${dist.dir}"/>
+   </target>
+
+
+<!--
+   <target depends="init,parameters" name="test">
+     <javac deprecation="true" optimize="false" debug="true" destdir="parameters" srcdir="src/test"/>
+     <junit printsummary="withOutAndErr">
+       <classpath>
+	 <pathelement location="parameters"/>
+       </classpath>
+       <batchtest>
+	 <fileset dir="${src.dir}/test">
+	   <include name="**/*TestCase.java"/>
+	 </fileset>
+       </batchtest>
+     </junit>
+   </target>
+-->
+</project>

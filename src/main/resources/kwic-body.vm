@@ -1,0 +1,42 @@
+<SCRIPT language="JavaScript1.2" type="text/javascript">
+  <!--
+      function generateDescription(nmarks) {
+      if (nmarks>1) {
+      document.write("<strong>$nmarks</strong> $lang.kwic-words $lang.kwic-thatmatches <strong>$query</strong> $lang.kwic-weremarked<br>$lang.kwic-goto [ <a href=\"javascript:SiteSeekerGoToNext()\" target=\"_self\">$lang.kwic-next</a> | <a href=\"javascript:SiteSeekerGoToPrev()\" target=\"_self\">$lang.kwic-previous</a> ] $lang.kwic-occurrence.")
+      }else{
+      if(nmarks<1){
+      document.write("$lang.kwic-no $lang.kwic-words $lang.kwic-thatmatches <strong>$query</strong> $lang.kwic-weremarked");
+      }else{
+      document.write("<strong>$nmarks</strong> $lang.kwic-word $lang.kwic-thatmatch <strong>$query</strong> $lang.kwic-weremarked")
+      }
+      }
+      }
+      //-->
+</SCRIPT>
+
+<DIV id="SiteSeekerNote" class="SiteSeekerLogo">
+  <P id="SiteSeekerNoteHeader">
+    <SPAN id="SiteSeekerNoteShowHide">
+      <A id="SiteSeekerNoteToggle" href="javascript:SiteSeekerShowHideNote();">$lang.kwic-hideinfo</A>
+    </SPAN>
+    $lang.kwic-cachedpage
+  </P>
+  <DIV id="SiteSeekerNoteInfo">
+    <P><STRONG>$lang.kwic-savedcopy
+	<A href="$docUrl" target=_self>$docUrl</A></STRONG>
+    </P>
+    <P>
+      <SCRIPT>generateDescription($nmarks)</SCRIPT>
+
+    </P>
+    <P>
+      $lang.kwic-pageupdated <a href="$docUrl" target="_self"> $lang.kwic-thelatestversion
+
+    </P>
+  </DIV>
+</DIV>
+<SCRIPT language="JavaScript1.2" type="text/javascript">
+  <!--
+      SiteSeekerInit();
+      //-->
+</SCRIPT>

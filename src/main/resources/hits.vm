@@ -1,0 +1,103 @@
+##
+## Macro for generating a sort order link
+##
+
+#macro( createCategoryLabel $c )
+#foreach( $category in $c )
+#if ( $velocityCount != 1 )
+,
+#end
+$category.GroupName: <strong>$category.Name</strong>#end
+#end
+
+##
+## Begin template
+##
+
+#if ( $spellingSuggestions.size() > 0 ) 
+<div class="ess-spelling">
+  <h2 class="portlet-section-header">$lang.search-spellheader</h2>
+  <ul>
+    #foreach( $suggestion in $spellingSuggestions )
+    <li class="portlet-section-body">
+      $lang.search-spellsearchfor
+      <a href="$suggestion.requestUrl" rel="nofollow">$suggestion.terms</a>
+    </li>
+    #end
+  </ul>
+</div>
+#end
+
+#if ( $hits.size() > 0 )
+<dl class="ess-hits">
+
+#foreach( $hit in $hits )
+
+
+ #* Hit header (title) *#
+ <dt class="ess-dtype-$hit.fileFormat.name portlet-section-header">
+ #set($tabindex = $tabindex + 1)
+    <span class="ess-hitnum">${hit.number}.</span>
+    #if ( "$hit.fileFormat.name" != "html" )
+      <span class="ess-dtypelabel $hit.fileFormat.name">[$lang.get("form-fileformats-$hit.fileFormat.name")]</span>
+    #end
+    <a class="ess-dtype-html" tabindex="$tabindex"
+       title="$hit.titleNoFormatting" onclick="return ess_registerClick('$hit.url',
+                                               $hit.number, '$sessionId', 
+					       '$portletId', '$uiLanguage');" 
+      onkeypress="return ess_handleKeypress(event, '$hit.url', $hit.number,
+      			 	  	    '$sessionId', '$portletId', '$uiLanguage');"
+      href="$hit.url">$hit.title</a> 
+   #if ( $hit.size > 100000 )
+    <span class="ess-size">- $hit.HumanReadableSize</span>
+   #end
+ </dt>
+  
+  <dd class="ess-hit-extract ess-dtype-html portlet-section-body">
+    $hit.dynamicSnippet
+  </dd>
+
+  #if ( "$!hit.metaDescription" != "" )
+  <dd class="ess-hit-description ess-dtype-html portlet-section-body portlet-font-dim">
+    <span class="ess-hit-description-text">
+      $hit.metaDescription
+    </span>
+  </dd>
+  #end
+
+  #if ( "$!hit.staticSnippet" != "" )
+  #* Optional "eri-desc"-section from hit page *#
+  <dd class="ess-special ess-dtype-html portlet-section-body">
+    $hit.staticSnippet
+  </dd>
+  #end
+  <dd class="ess-info portlet-font-label">
+      #createCategoryLabel( $hit.categories )
+      &middot; $hit.YearMonthDay
+      &middot; <a href="$hit.cacheUrl" title="$lang.search-cachelink: $hit.titleNoFormatting">$lang.search-cachelink</a> 
+  </dd>
+  #if ( $hit.attachments.size() > 0 )
+    <ol class="ess-attachments">
+    #foreach( $attachment in $hit.attachments ) 
+      <li>
+        #if ( "$attachment.fileFormat.name" != "html" )
+          <span class="ess-dtypelabel $attachment.fileFormat.name">[$lang.get("form-fileformats-$attachment.fileFormat.name")]</span>
+        #end
+        <a class="ess-dtype-html" 
+          title="$attachment.titleNoFormatting" onclick="return ess_registerClick('$attachment.url',
+                                                  $hit.number, '$sessionId', 
+                    '$portletId', '$uiLanguage');" 
+          onkeypress="return ess_handleKeypress(event, '$attachment.url', $hit.number,
+                          '$sessionId', '$portletId', '$uiLanguage');"
+          href="$attachment.url">$attachment.title</a> 
+      #if ( $attachment.size > 100000 )
+        <span class="ess-size">- $attachment.HumanReadableSize</span>
+      #end
+      </li>
+    #end
+    </ol>
+  #end
+#end
+
+</dl>
+#end
